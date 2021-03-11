@@ -1,0 +1,67 @@
+﻿@using Backend4.Services
+@model Backend4.Models.RegistryModel
+@{
+    ViewBag.Title = "Sign up";
+}
+
+<h2>Sign up</h2>
+
+<form asp-action="SignUp" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">First name</label>
+        <div class="col-md-10">
+            <input asp-for="FirstName" type="text" class="form-control"/>
+            <span asp-validation-for="FirstName"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Last name</label>
+        <div class="col-md-10">
+            <input asp-for="LastName" type="text" class="form-control"/>
+            <span asp-validation-for="LastName"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Birthday</label>
+        <div class="col-md-10 form-inline">
+            <select asp-for="Date" class="form-control">
+                <option disabled="disabled">Day</option>
+                @for (var i = 1; i < 32; i++)
+                {
+                    <option>@i</option>
+                }
+            </select>
+            <select asp-for="Month" asp-items="@(new SelectList(ViewBag.AllMonths, "Id", "Name"))" class="form-control">
+            </select>
+            <select asp-for="Year" class="form-control">
+                <option disabled="disabled">Year</option>
+                @for (var j = DateTime.Now.Year - 100; j <= DateTime.Now.Year - 18; j++)
+                {
+                    <option>@j</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender" class="col-md-2 control-label">Gender</label>
+        <div class="col-md-10">
+            <div class="radio">
+                <label>
+                    <input asp-for="Gender" value="@Gender.Male" type="radio"/>
+                    Male
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input asp-for="Gender" value="@Gender.Female" type="radio"/>
+                    Female
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button name="SignUp" class="btn btn-primary" value="True">Sign up</button>
+        </div>
+    </div>
+</form>
